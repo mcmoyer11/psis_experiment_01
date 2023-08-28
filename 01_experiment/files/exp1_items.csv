@@ -1,0 +1,18 @@
+number,item,TrialType,subjective,PSI_type,PSI_item,Context_sentence,Order,Q_SpeakerCondition,Q_AddresseeCondition,Answer,DM
+1,party,test,1,locative,left-of,"Jo is hosting a party for friends out of town. Jo knows everybody, but nobody else knows each other.","From left to right, the friends are standing in this order: Su is leftmost, then Jan, and Jo and Mary together on the right.","Mary asks, ""Who is on the left?""","Su asks, ""Who is on the left?""","Jo says, ""Jan is on the left.""",Is Jo right?
+2,Dog,test,1,locative,right-of,Tim is going to the local dog park. He sees a friend there talking to some other dog owners.,"From right to left, the dog owners are in this order:",,,,
+3,books,test,1,locative,behind,Mac is standing in line at a bookstore.,,,,,
+4,concert,test,1,locative,in-front-of,Lou is at a concert with her high school class.,,,,,
+5,movies,test,1,locative,next-to,Hank is at the movies.,,,,,
+6,car,test,0,locative,north,map,,,,,
+7,train,test,0,locative,south,map,,,,,
+8,bike,test,0,locative,east,map,,,,,
+9,bus,test,0,locative,west,map,,,,,
+10,,test,,x,local,,,,,,
+11,,test,,x,regional,,,,,,
+12,,test,,soco-rel,foreigner,,,,,,
+13,,test,,soco-rel,neighbor,,,,,,
+14,,test,,soco-rel,home,,,,,,
+15,,test,,soco-rel,visiting,,,,,,
+16,,test,,soco-rel,immigrant,,,,,,
+17,,test,,soco-rel,heathen,,,,,,
