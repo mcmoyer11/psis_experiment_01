@@ -23,7 +23,7 @@ function make_slides(f) {
       if ((exp.lives < 3) && ((exp.text_input == exp.listener) | (exp.text_input == lower) | (exp.text_input == upper))) {
         exp.data_trials.push({
           "slide_number_in_experiment": exp.phase,
-          "tgrep_id": "bot_check",
+          "Number": "bot_check",
           "response": [exp.text_input, exp.listener],
         });
         exp.go();
@@ -31,7 +31,7 @@ function make_slides(f) {
       else {
         exp.data_trials.push({
           "slide_number_in_experiment": exp.phase,
-          "tgrep_id": "bot_check",
+          "Number": "bot_check",
           "response": [exp.text_input, exp.listener],
         });
         if (exp.lives == 0) {
@@ -151,7 +151,7 @@ function make_slides(f) {
       for (var i = 0; i < 3; i++) {
         exp.data_trials.push({
           "slide_number_in_experiment": exp.phase,
-          "tgrep_id": "example1",
+          "Number": "example1",
           "paraphrase": exp.paraphraseArray[i].name,
           "rating": $("#slider1_" + (i + 1)).slider("option", "value"),
           "order": exp.paraphraseArray[0].name + "-" + exp.paraphraseArray[1].name + "-" + exp.paraphraseArray[2].name,
@@ -159,7 +159,7 @@ function make_slides(f) {
       }
       exp.data_trials.push({
         "slide_number_in_experiment": exp.phase,
-        "tgrep_id": "example1",
+        "Number": "example1",
         "paraphrase": "other",
         "rating": $("#slider1_4").slider("option", "value"),
         "order": exp.paraphraseArray[0].name + "-" + exp.paraphraseArray[1].name + "-" + exp.paraphraseArray[2].name,
@@ -246,7 +246,7 @@ slides.example2 = slide({
     for (var i = 0; i < 3; i++) {
       exp.data_trials.push({
         "slide_number_in_experiment": exp.phase,
-        "tgrep_id": "example2",
+        "Number": "example2",
         "paraphrase": exp.paraphraseArray[i].name,
         "rating": $("#slider2_" + (i + 1)).slider("option", "value"),
         "order": exp.paraphraseArray[0].name + "-" + exp.paraphraseArray[1].name + "-" + exp.paraphraseArray[2].name,
@@ -254,7 +254,7 @@ slides.example2 = slide({
     }
     exp.data_trials.push({
       "slide_number_in_experiment": exp.phase,
-      "tgrep_id": "example2",
+      "Number": "example2",
       "paraphrase": "other",
       "rating": $("#slider2_4").slider("option", "value"),
       "order": exp.paraphraseArray[0].name + "-" + exp.paraphraseArray[1].name + "-" + exp.paraphraseArray[2].name,
@@ -342,7 +342,7 @@ slides.example3 = slide({
     for (var i = 0; i < 3; i++) {
       exp.data_trials.push({
         "slide_number_in_experiment": exp.phase,
-        "tgrep_id": "example3",
+        "Number": "example3",
         "paraphrase": exp.paraphraseArray[i].name,
         "rating": $("#slider3_" + (i + 1)).slider("option", "value"),
         "order": exp.paraphraseArray[0].name + "-" + exp.paraphraseArray[1].name + "-" + exp.paraphraseArray[2].name,
@@ -350,7 +350,7 @@ slides.example3 = slide({
     }
     exp.data_trials.push({
       "slide_number_in_experiment": exp.phase,
-      "tgrep_id": "example3",
+      "Number": "example3",
       "paraphrase": "other",
       "rating": $("#slider3_4").slider("option", "value"),
       "order": exp.paraphraseArray[0].name + "-" + exp.paraphraseArray[1].name + "-" + exp.paraphraseArray[2].name,
@@ -436,7 +436,7 @@ slides.example4 = slide({
     for (var i = 0; i < 3; i++) {
       exp.data_trials.push({
         "slide_number_in_experiment": exp.phase,
-        "tgrep_id": "example4",
+        "Number": "example4",
         "paraphrase": exp.paraphraseArray[i].name,
         "rating": $("#slider4_" + (i + 1)).slider("option", "value"),
         "order": exp.paraphraseArray[0].name + "-" + exp.paraphraseArray[1].name + "-" + exp.paraphraseArray[2].name,
@@ -444,7 +444,7 @@ slides.example4 = slide({
     }
     exp.data_trials.push({
       "slide_number_in_experiment": exp.phase,
-      "tgrep_id": "example4",
+      "Number": "example4",
       "paraphrase": "other",
       "rating": $("#slider4_4").slider("option", "value"),
       "order": exp.paraphraseArray[0].name + "-" + exp.paraphraseArray[1].name + "-" + exp.paraphraseArray[2].name,
@@ -480,41 +480,44 @@ slides.generateEntities = slide({
     var generic = stim;
     this.generic = generic;
 
-    var contexthtml = this.format_context(generic.PreceedingContext);
-    var entirehtml = "<font color=#FF0000> " + this.format_sentence(generic.EntireSentence)
-    contexthtml = contexthtml + entirehtml
-    exp.theParaphrase.value = generic.TheResponse
-    exp.aParaphrase.value = generic.AResponse
-    exp.allParaphrase.value = generic.AllResponse
+    var contexthtml = this.format_context(generic.Context_sentence);
+    var orderhtml = this.format_sentence(generic.Order)
+    var entirehtml = "<font color=#FF0000> " + this.format_sentence(generic.Order)
+    contexthtml = contexthtml + orderhtml + Q
+    // exp.theParaphrase.value = generic.TheResponse
+    // exp.aParaphrase.value = generic.AResponse
+    // exp.allParaphrase.value = generic.AllResponse
 
-    for (i = 0; i < 3; i++) {
-      $(`#sent5_${i + 1}`).text(exp.paraphraseArray[i].value)
-    }
 
-    var callback = function () {
+    utils.make_slider("#single_slider0", this.make_slider_callback(0))
+    // for (i = 0; i < 3; i++) {
+    //   $(`#sent5_${i + 1}`).text(exp.paraphraseArray[i].value)
+    // }
 
-      var total = ($("#slider5_1").slider("option", "value") +
-        $("#slider5_2").slider("option", "value") +
-        $("#slider5_3").slider("option", "value") +
-        $("#slider5_4").slider("option", "value"));
+    // var callback = function () {
 
-      if (total > 1.0) {
-        var other_total = total - $(this).slider("option", "value");
-        $(this).slider("option", "value", 1 - other_total);
-      }
+    //   var total = ($("#slider5_1").slider("option", "value") +
+    //     $("#slider5_2").slider("option", "value") +
+    //     $("#slider5_3").slider("option", "value") +
+    //     $("#slider5_4").slider("option", "value"));
 
-      var perc = Math.round($(this).slider("option", "value") * 100);
-      $("#" + $(this).attr("id") + "_val").val(perc);
-    }
+    //   if (total > 1.0) {
+    //     var other_total = total - $(this).slider("option", "value");
+    //     $(this).slider("option", "value", 1 - other_total);
+    //   }
 
-    utils.make_slider("#slider5_1", callback);
-    utils.make_slider("#slider5_2", callback);
-    utils.make_slider("#slider5_3", callback);
-    utils.make_slider("#slider5_4", callback);
+    //   var perc = Math.round($(this).slider("option", "value") * 100);
+    //   $("#" + $(this).attr("id") + "_val").val(perc);
+    // }
 
-    for (i = 0; i < 4; i++) {
-      $("#slider5_" + (i + 1)).slider("value", 0)
-    }
+    // utils.make_slider("#slider5_1", callback);
+    // utils.make_slider("#slider5_2", callback);
+    // utils.make_slider("#slider5_3", callback);
+    // utils.make_slider("#slider5_4", callback);
+
+    // for (i = 0; i < 4; i++) {
+    //   $("#slider5_" + (i + 1)).slider("value", 0)
+    // }
 
     $(".context").html(contexthtml);
   },
@@ -588,7 +591,7 @@ slides.generateEntities = slide({
     for (var i = 0; i < 3; i++) {
       exp.data_trials.push({
         "slide_number_in_experiment": exp.phase,
-        "tgrep_id": this.generic.TGrepID,
+        "Number": this.generic.TGrepID,
         "paraphrase": exp.paraphraseArray[i].name,
         "rating": $("#slider5_" + (i + 1)).slider("option", "value"),
         "order": exp.paraphraseArray[0].name + "-" + exp.paraphraseArray[1].name + "-" + exp.paraphraseArray[2].name,
@@ -596,7 +599,7 @@ slides.generateEntities = slide({
     }
     exp.data_trials.push({
       "slide_number_in_experiment": exp.phase,
-      "tgrep_id": this.generic.TGrepID,
+      "Number": this.generic.TGrepID,
       "paraphrase": "other",
       "rating": $("#slider5_4").slider("option", "value"),
       "order": exp.paraphraseArray[0].name + "-" + exp.paraphraseArray[1].name + "-" + exp.paraphraseArray[2].name,
